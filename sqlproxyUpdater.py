@@ -12,8 +12,8 @@ while True:
         etcd_json = json.loads(etcd.text)
         for nodes in etcd_json['node']['nodes']:
             hosts = nodes['key'].split('/')
-            print hosts[3]
+            print(hosts[3])
 
     else:
-        print "ERROR connecting to etcd"
+        print("ERROR connecting to etcd")
     time.sleep(2)
