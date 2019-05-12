@@ -37,7 +37,8 @@ while True:
             etcd_count += 1
             print(hosts[3])
             etcd_sqlnodes.extend(hosts[3])
-        print("array: " + etcd_sqlnodes)
+        print("array:")
+        print(', '.join(etcd_sqlnodes)
 
     else:
         print(date + " ERROR connecting to etcd")
