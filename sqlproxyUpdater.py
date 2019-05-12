@@ -12,11 +12,11 @@ print(date + " Starting updater...")
 while True:
     date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     if os.getenv('DISCOVERY_SERVICE') is None:
-        print(date + "DISCOVERY_SERVICE variable is not set")
+        print(date + " DISCOVERY_SERVICE variable is not set")
         continue
     if os.getenv('CLUSTER_NAME') is None:
-        print(date + "CLUSTER_NAME variable is not set")
-    continue
+        print(date + " CLUSTER_NAME variable is not set")
+        continue
     print(date + " Reading data from etcd...")
     etcd = requests.get("http://" + os.environ['DISCOVERY_SERVICE'] + "/v2/keys/pxc-cluster/" + os.environ['CLUSTER_NAME'])
 
