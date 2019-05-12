@@ -35,8 +35,9 @@ while True:
         for nodes in etcd_json['node']['nodes']:
             hosts = nodes['key'].split('/')
             etcd_count += 1
+            print(hosts[3])
             etcd_sqlnodes.extend(hosts[3])
-        print(etcd_sqlnodes.sort())
+        print("array: " + etcd_sqlnodes)
 
     else:
         print(date + " ERROR connecting to etcd")
