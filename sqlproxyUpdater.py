@@ -5,11 +5,21 @@ import json
 import os
 import time
 import datetime
+import MySQLdb
+
 
 date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 print(date + " Starting updater...")
 
+db = MySQLdb.connect(host=os.environ['SQLPROXY_HOST'],
+                    port=6032
+                    user=os.environ['PROXY_ADMIN_USER'],
+                    pass=os.environ['PROXY_ADMIN_PASS'])
+cur = db.cursor()
+
 while True:
+    etcd_count = 0
+    etcd_sqlnodes = []
     date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     if os.getenv('DISCOVERY_SERVICE') is None:
         print(date + " DISCOVERY_SERVICE variable is not set")
@@ -24,7 +34,9 @@ while True:
         etcd_json = json.loads(etcd.text)
         for nodes in etcd_json['node']['nodes']:
             hosts = nodes['key'].split('/')
-            print(hosts[3])
+            etcd_count += 1
+            etcd_sqlnodes.extend(hosts[3])
+        print(etcd_sqlnodes.sort())
 
     else:
         print(date + " ERROR connecting to etcd")
