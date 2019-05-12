@@ -14,7 +14,7 @@ print(date + " Starting updater...")
 db = MySQLdb.connect(host=os.environ['SQLPROXY_HOST'],
                     port=6032,
                     user=os.environ['PROXY_ADMIN_USER'],
-                    pass=os.environ['PROXY_ADMIN_PASS'])
+                    passwd=os.environ['PROXY_ADMIN_PASS'])
 cur = db.cursor()
 
 while True:
