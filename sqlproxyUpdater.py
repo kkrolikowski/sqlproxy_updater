@@ -8,6 +8,12 @@ import time
 print("Starting updater...")
 
 while True:
+    if os.environ['DISCOVERY_SERVICE'] is None:
+        print("DISCOVERY_SERVICE variable is not set")
+        continue
+    if os.environ['CLUSTER_NAME'] is None:
+        print("CLUSTER_NAME variable is not set")
+    continue
     print("Reading data from etcd...")
     etcd = requests.get("http://" + os.environ['DISCOVERY_SERVICE'] + "/v2/keys/pxc-cluster/" + os.environ['CLUSTER_NAME'])
 
