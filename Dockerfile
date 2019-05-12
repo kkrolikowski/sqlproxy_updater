@@ -7,6 +7,6 @@ COPY sqlproxyUpdater.py .
 COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT [ "/entrypoint.sh" ]
 
-CMD ["python", "-u", "./sqlproxyUpdater.py"]
+CMD [ "python", "-u", "./sqlproxyUpdater.py" ]
