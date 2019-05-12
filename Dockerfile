@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN apt update && apt -y install python python-pip
+RUN apt-get update && apt-get install -y install python python-pip
 RUN pip install --no-cache-dir requests
 
 WORKDIR /usr/local/bin
