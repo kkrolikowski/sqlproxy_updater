@@ -1,6 +1,6 @@
 FROM python:3
 
-RUN pip install --no-cache-dir requests
+RUN pip install --no-cache-dir requests json time
 
 WORKDIR /usr/local/bin
 COPY sqlproxyUpdater.py .
