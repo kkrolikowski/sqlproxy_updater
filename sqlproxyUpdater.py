@@ -5,7 +5,10 @@ import json
 import os
 import time
 
+print("Starting updater...")
+
 while True:
+    print("Reading data from etcd...")
     etcd = requests.get("http://" + os.environ['DISCOVERY_SERVICE'] + "/v2/keys/pxc-cluster/" + os.environ['CLUSTER_NAME'])
 
     if etcd.status_code == 200:
