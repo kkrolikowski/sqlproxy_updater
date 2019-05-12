@@ -12,7 +12,7 @@ date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 print(date + " Starting updater...")
 
 db = MySQLdb.connect(host=os.environ['SQLPROXY_HOST'],
-                    port=6032
+                    port=6032,
                     user=os.environ['PROXY_ADMIN_USER'],
                     pass=os.environ['PROXY_ADMIN_PASS'])
 cur = db.cursor()
