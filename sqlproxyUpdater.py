@@ -11,10 +11,10 @@ print(date + " Starting updater...")
 
 while True:
     date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-    if os.environ['DISCOVERY_SERVICE'] is None:
+    if os.getenv('DISCOVERY_SERVICE') is None:
         print(date + "DISCOVERY_SERVICE variable is not set")
         continue
-    if os.environ['CLUSTER_NAME'] is None:
+    if os.getenv('CLUSTER_NAME') is None:
         print(date + "CLUSTER_NAME variable is not set")
     continue
     print(date + " Reading data from etcd...")
