@@ -3,14 +3,17 @@
 import requests
 import json
 import os
+import time
 
-etcd = requests.get("http://" + os.environ['DISCOVERY_SERVICE'] + "/v2/keys/pxc-cluster/clsql")
+while True:
+    etcd = requests.get("http://" + os.environ['DISCOVERY_SERVICE'] + "/v2/keys/pxc-cluster/" + os.environ['CLUSTER_NAME'])
 
-if etcd.status_code == 200:
-    etcd_json = json.loads(etcd.text)
-    for nodes in etcd_json['node']['nodes']:
-        hosts = nodes['key'].split('/')
-        print hosts[3]
+    if etcd.status_code == 200:
+        etcd_json = json.loads(etcd.text)
+        for nodes in etcd_json['node']['nodes']:
+            hosts = nodes['key'].split('/')
+            print hosts[3]
 
-else:
-    print "ERROR connecting to etcd"
+    else:
+        print "ERROR connecting to etcd"
+    time.sleep(2)
