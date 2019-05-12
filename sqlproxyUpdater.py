@@ -4,17 +4,20 @@ import requests
 import json
 import os
 import time
+import datetime
 
-print("Starting updater...")
+date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+print(date + " Starting updater...")
 
 while True:
+    date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     if os.environ['DISCOVERY_SERVICE'] is None:
-        print("DISCOVERY_SERVICE variable is not set")
+        print(date + "DISCOVERY_SERVICE variable is not set")
         continue
     if os.environ['CLUSTER_NAME'] is None:
-        print("CLUSTER_NAME variable is not set")
+        print(date + "CLUSTER_NAME variable is not set")
     continue
-    print("Reading data from etcd...")
+    print(date + " Reading data from etcd...")
     etcd = requests.get("http://" + os.environ['DISCOVERY_SERVICE'] + "/v2/keys/pxc-cluster/" + os.environ['CLUSTER_NAME'])
 
     if etcd.status_code == 200:
@@ -24,5 +27,5 @@ while True:
             print(hosts[3])
 
     else:
-        print("ERROR connecting to etcd")
+        print(date + " ERROR connecting to etcd")
     time.sleep(2)
