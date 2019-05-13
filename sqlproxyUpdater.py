@@ -43,7 +43,9 @@ while True:
             if cur.rowcount is 0:
                 print("Adding " + node + " to proxysql")
                 cur.execute("INSERT INTO mysql_servers (hostgroup_id, hostname, port, max_replication_lag) VALUES (0, \'" + node + "\', 3306, 20)")
-
+        
+        cur.execute("SELECT * FROM mysql_servers")
+        nodeCount = cur.rowcount
         print(date + " ProxySQL is up to date. ProxySQL DB: " + str(nodeCount) + ", ETDC: " + str(len(etcd_sqlnodes)))
 
     else:
