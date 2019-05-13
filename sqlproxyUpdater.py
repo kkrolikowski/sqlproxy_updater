@@ -18,8 +18,8 @@ db = MySQLdb.connect(host=os.environ['SQLPROXY_HOST'],
 cur = db.cursor()
 
 while True:
-    etcd_count = 0
     etcd_sqlnodes = []
+    nodeCount = 0
     date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     if os.getenv('DISCOVERY_SERVICE') is None:
         print(date + " DISCOVERY_SERVICE variable is not set")
@@ -34,18 +34,17 @@ while True:
         etcd_json = json.loads(etcd.text)
         for nodes in etcd_json['node']['nodes']:
             hosts = nodes['key'].split('/')
-            etcd_count += 1
-            print(hosts[3])
             etcd_sqlnodes.append(hosts[3])
         
         for node in etcd_sqlnodes:
             cur.execute("SELECT * FROM mysql_servers WHERE hostname = \'" + node + "\'")
             cur.fetchall()
+            nodeCount = cur.rowcount
             if cur.rowcount is 0:
+                print("Adding " + node + " to proxysql")
                 cur.execute("INSERT INTO mysql_servers (hostgroup_id, hostname, port, max_replication_lag) VALUES (0, \'" + node + "\', 3306, 20)")
 
-        print("array:")
-        print(etcd_sqlnodes)
+        print(date, + " ProxySQL is up to date. ProxySQL DB: " + nodeCount + ", ETDC: ", len(etcd_sqlnodes))
 
     else:
         print(date + " ERROR connecting to etcd")
