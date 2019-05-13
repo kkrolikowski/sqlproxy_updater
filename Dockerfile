@@ -6,6 +6,6 @@ RUN apt-get update && \
 RUN pip3 install --no-cache-dir requests
 
 WORKDIR /usr/local/bin
-COPY *.py .
+COPY *.py /usr/local/bin/
 
 CMD [ "python3", "-u", "./sqlproxyUpdater.py" ]
