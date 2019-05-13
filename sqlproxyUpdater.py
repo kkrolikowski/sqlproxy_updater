@@ -37,6 +37,13 @@ while True:
             etcd_count += 1
             print(hosts[3])
             etcd_sqlnodes.append(hosts[3])
+        
+        for node in etcd_sqlnodes:
+            cur.execute("SELECT * FROM mysql_servers WHERE hostname = \'" + node + "\'")
+            cur.fetchall()
+            if cur.rowcount is 0:
+                cur.execute("INSERT INTO mysql_servers (hostgroup_id, hostname, port, max_replication_lag) VALUES (0, \'" + node + "\', 3306, 20)")
+
         print("array:")
         print(etcd_sqlnodes)
 
