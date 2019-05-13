@@ -11,6 +11,6 @@ class ETCDClass:
         etcd = requests.get("http://" + self.etcdAddr + "/v2/keys/pxc-cluster/" + self.clName)
         if etcd.status_code == 200:
             etcd_json = json.loads(etcd.text)
-            for nodes in etcd_json['node']['nodes']:
-                hosts = nodes['key'].split('/')
+            for sqlnodes in etcd_json['node']['nodes']:
+                hosts = sqlnodes['key'].split('/')
                 nodes.append(hosts[3])
