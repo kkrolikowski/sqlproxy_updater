@@ -44,7 +44,7 @@ while True:
                 print("Adding " + node + " to proxysql")
                 cur.execute("INSERT INTO mysql_servers (hostgroup_id, hostname, port, max_replication_lag) VALUES (0, \'" + node + "\', 3306, 20)")
 
-        print(date, + " ProxySQL is up to date. ProxySQL DB: " + nodeCount + ", ETDC: ", len(etcd_sqlnodes))
+        print(date, + " ProxySQL is up to date. ProxySQL DB: " + nodeCount + ", ETDC: " + len(etcd_sqlnodes))
 
     else:
         print(date + " ERROR connecting to etcd")
