@@ -7,7 +7,7 @@ class ETCDClass:
         self.etcdAddr = etcdAddr
         self.clName = clName
     def read(self):
-        etcd = requests.get("http://" + etcdAddr + "/v2/keys/pxc-cluster/" + clName)
+        etcd = requests.get("http://" + self.etcdAddr + "/v2/keys/pxc-cluster/" + self.clName)
         if etcd.status_code == 200:
             etcd_json = json.loads(etcd.text)
             for nodes in etcd_json['node']['nodes']:
