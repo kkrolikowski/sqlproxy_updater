@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import json
 import os
 import time
 import datetime
