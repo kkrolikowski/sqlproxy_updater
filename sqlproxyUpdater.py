@@ -36,7 +36,7 @@ while True:
             hosts = nodes['key'].split('/')
             etcd_count += 1
             print(hosts[3])
-            etcd_sqlnodes.extend(hosts[3])
+            etcd_sqlnodes.append(hosts[3])
         print("array:")
         print(etcd_sqlnodes)
 
