@@ -17,19 +17,20 @@ def main():
                         passwd=os.environ['PROXY_ADMIN_PASS'])
     cur = db.cursor()
 
-    etcd = ETCDClass(os.environ['DISCOVERY_SERVICE'], os.environ['CLUSTER_NAME'])
-
     while True:
         etcd_sqlnodes = []
         proxydb_sqlnodes = []
         nodeCount = 0
         date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+        
         if os.getenv('DISCOVERY_SERVICE') is None:
             print(date + " DISCOVERY_SERVICE variable is not set")
             continue
         if os.getenv('CLUSTER_NAME') is None:
             print(date + " CLUSTER_NAME variable is not set")
             continue
+        
+        etcd = ETCDClass(os.environ['DISCOVERY_SERVICE'], os.environ['CLUSTER_NAME'])
         print(date + " Reading data from etcd...")
         etcd_sqlnodes = etcd.read()
             
