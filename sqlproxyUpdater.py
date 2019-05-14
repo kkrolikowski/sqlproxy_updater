@@ -33,6 +33,10 @@ def main():
         etcd = ETCDClass(os.environ['DISCOVERY_SERVICE'], os.environ['CLUSTER_NAME'])
         print(date + " Reading data from etcd...")
         etcd_sqlnodes = etcd.read()
+
+        if not etcd_sqlnodes:
+            time.sleep(2)
+            continue
             
         for node in etcd_sqlnodes:
             cur.execute("SELECT * FROM mysql_servers WHERE hostname = \'" + node + "\'")
