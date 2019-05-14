@@ -13,7 +13,7 @@ class ETCDClass:
         try:
             etcd = requests.get("http://" + self.etcdAddr + "/v2/keys/pxc-cluster/" + self.clName)
         except requests.exceptions.ConnectionError:
-            print "ETCD temporarily unavailable. Backoff engaged. (10s)"
+            print("ETCD temporarily unavailable. Backoff engaged. (10s)")
             time.sleep(10)
         else:
             if etcd.status_code == 200:
